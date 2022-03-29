@@ -5,6 +5,10 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
 import ChangePassword from "./Components/ChangePassword/ChangePassword";
+import SignIn from "./Components/SignIn/SIgnIn";
+import SignUp from "./Components/SignUp/SignUp";
+import SignOut from "./Components/SignOut/SignOut";
+import NavBar from "./Components/NavBar/NavBar";
 
 function App() {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -92,50 +96,17 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <NavBar />
       <Home />
 
-      <div className="navbar-links"></div>
-      <Link classname="navbar-link" to='/sign-in'>Sign In</Link>
-      <Link classname="navbar-link" to='/sign-up'>Sign Up</Link>
-      <Link classname="navbar-link" to='/change-password'>Change Password</Link>
+
       <main>
         <Routes>
           <Route path='/'/>
-          <Route path='/sign-up/' />
+          <Route path='/sign-in/' element={<SignIn handleChange={handleChange} handleSignIn={handleSignIn}/>}/>
+          <Route path='/sign-up/' element={<SignUp handleChange={handleChange} handleSubmit={handleSubmit}/>}/>
           <Route path='/change-password/' element={<ChangePassword handleChange={handleChange} handleChangePassword={handleChangePassword}/>}/>
         </Routes>
-
-        <div className="sign-up">
-          <h2>Sign Up!</h2>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Email:
-              <input type="email" name="email" onChange={handleChange} />
-            </label>
-            <label>
-              Password:
-              <input type="password" name="password" onChange={handleChange} />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
-
-        <div className="sign-in">
-          <h2>Sign In!</h2>
-          <form onSubmit={handleSignIn}>
-            <label>
-              Email:
-              <input type="email" name="email" onChange={handleChange} />
-            </label>
-            <label>
-              Password:
-              <input type="password" name="password" onChange={handleChange} />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
-
-        <button onClick={handleSignOut}>Sign Out</button>
       </main>
 
 
