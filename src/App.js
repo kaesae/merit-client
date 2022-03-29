@@ -6,8 +6,7 @@ import Footer from "./Components/Footer/Footer";
 
 function App() {
   const [user, setUser] = useState({ email: "", password: "" });
-  const [token, setToken] = useState("")
-
+  const [token, setToken] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -40,8 +39,8 @@ function App() {
       method: "POST",
       body: JSON.stringify(user),
     })
-    .then((response) => response.json())
-    .then((data) => setToken(data.user.token))
+      .then((response) => response.json())
+      .then((data) => setToken(data.user.token));
   };
 
   const handleSignOut = (event) => {
@@ -49,12 +48,23 @@ function App() {
     fetch("http://127.0.0.1:8000/sign-out/", {
       headers: {
         "Content-Type": "application/json",
-        "Authorizations": `Token ${token}`
+        Authorizations: `Token ${token}`,
       },
       method: "DELETE",
     })
-    .then(() => console.log('You are signed out!'))
-    .then(() => setToken(""))
+      .then(() => console.log("You are signed out!"))
+      .then(() => setToken(""));
+  };
+
+  const handleChangePassword = (event) => {
+    event.preventDefault();
+    fetch("http://127.0.0.1:8000/change-password/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorizations: `Token ${token}`,
+      },
+      method: "PUT",
+    }).then(() => console.log("You have successfully changed your password."));
   };
 
   return (
@@ -94,6 +104,19 @@ function App() {
 
         <button onClick={handleSignOut}>Sign Out</button>
       </main>
+
+      <h2>Change Password</h2>
+      <form onSubmit={handleChangePassword}>
+        <label>
+          Old Password:
+          <input type="password" name="password" onChange={handleChange} />
+        </label>
+        <label>
+          New Password:
+          <input type="password" name="password" onChange={handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
       <Footer />
     </div>
   );
