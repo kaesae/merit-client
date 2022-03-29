@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import Home from "./Components/Home/Home";
 
 function App() {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -70,8 +71,11 @@ function App() {
   return (
     <div className="App">
       <Header />
-
+      <Home />
       <main>
+        <Routes>
+          <Route path='/'/>
+        </Routes>
         <div className="sign-up">
           <h2>Sign Up!</h2>
           <form onSubmit={handleSubmit}>
@@ -105,7 +109,8 @@ function App() {
         <button onClick={handleSignOut}>Sign Out</button>
       </main>
 
-      <h2>Change Password</h2>
+    <div className="change-password">
+    <h2>Change Password</h2>
       <form onSubmit={handleChangePassword}>
         <label>
           Old Password:
@@ -117,6 +122,9 @@ function App() {
         </label>
         <input type="submit" value="Submit" />
       </form>
+    </div>
+
+
       <Footer />
     </div>
   );
