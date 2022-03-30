@@ -1,4 +1,4 @@
-const SignOut = (handleSignOut) => {
+const SignOut = ({handleSignOut}) => {
     return (
       <button onClick={handleSignOut}>Sign Out</button>
     );

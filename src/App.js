@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, Navigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
@@ -67,12 +67,12 @@ function App() {
     fetch("http://127.0.0.1:8000/sign-out/", {
       headers: {
         "Content-Type": "application/json",
-        Authorizations: `Token ${token}`,
+        Authorization: `Token ${token}`,
       },
       method: "DELETE",
     })
-      .then(() => console.log("You are signed out!"))
-      .then(() => setToken(""));
+      .then(() => setToken(""))
+      .then(console.log("You are signed out!"));
   };
 
   const handleChangePassword = (event) => {
@@ -80,10 +80,11 @@ function App() {
     fetch("http://127.0.0.1:8000/change-password/", {
       headers: {
         "Content-Type": "application/json",
-        Authorizations: `Token ${token}`,
+        Authorization: `Token ${token}`,
       },
-      method: "PUT",
-    }).then(() => console.log("You have successfully changed your password."));
+      method: "PATCH",
+    })
+    .then(console.log("You have successfully changed your password."));
   };
 
   const lastPost = (event) => {

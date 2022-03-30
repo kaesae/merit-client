@@ -13,7 +13,7 @@ const SignUp = ({handleSubmit, handleChange}) => {
           <input type="password" name="password" onChange={handleChange} />
         </label>
         <br />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" onClick={handleSubmit} />
       </form>
     </div>
   );
