@@ -5,30 +5,21 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
 import ChangePassword from "./Components/ChangePassword/ChangePassword";
-import SignIn from "./Components/SignIn/SIgnIn";
+import SignIn from "./Components/SignIn/SignIn";
 import SignUp from "./Components/SignUp/SignUp";
 import SignOut from "./Components/SignOut/SignOut";
 import NavBar from "./Components/NavBar/NavBar";
+import Medal from "./Icons/goldmedal.png";
+
 
 function App() {
   const [user, setUser] = useState({ email: "", password: "" });
   const [token, setToken] = useState("");
+  const [value, setValue] = useState("");
   const [latestPost, setLatestPost] = useState();
 
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:8000/overview", {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorizations: `Token ${token}`,
-  //     },
-  //     method: "GET",
-  //   })
-  //     .then((response) => response.json())
-  //     .then(console.log("YOU ARE HERE"))
-  //     .then((data) => console.log(data));
-  // }, []);
+  const url = "http://127.0.0.1:8000"
 
-  // Homepage with latest post
 
 
   // Overview Page
@@ -57,6 +48,7 @@ function App() {
 
   const handleSignIn = (event) => {
     event.preventDefault();
+    // fetch(`${url}/sign-in/`, {
     fetch("http://127.0.0.1:8000/sign-in/", {
       headers: {
         "Content-Type": "application/json",
@@ -67,6 +59,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => setToken(data.user.token))
       .then(console.log("You have signed in"));
+      console.log(token)
   };
 
   const handleSignOut = (event) => {
@@ -93,6 +86,21 @@ function App() {
     }).then(() => console.log("You have successfully changed your password."));
   };
 
+  const lastPost = (event) => {
+    event.preventDefault();
+    console.log(`${token}`)
+    fetch("http://127.0.0.1:8000/overview/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorizations: `Token ${token}`,
+      },
+      method: "GET",
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+
+  }
+
   return (
     <div className="App">
       <Header />
@@ -101,10 +109,17 @@ function App() {
 
 
       <main>
+      <div className="home-container">
+        <h3 className="merit-title">Merit</h3>
+        <img className="medal" src={Medal} />
+
+      </div>
         <Routes>
-          <Route path='/'/>
-          <Route path='/sign-in/' element={<SignIn handleChange={handleChange} handleSignIn={handleSignIn}/>}/>
+          {/* <Route path='/'/> */}
+          <Route path='/home/'/>
           <Route path='/sign-up/' element={<SignUp handleChange={handleChange} handleSubmit={handleSubmit}/>}/>
+          <Route path='/sign-in/' element={<SignIn handleChange={handleChange} handleSignIn={handleSignIn}/>}/>
+          <Route path='/sign-out/' element={<SignOut handleChange={handleChange} handleSignOut={handleSignOut}/>}/>
           <Route path='/change-password/' element={<ChangePassword handleChange={handleChange} handleChangePassword={handleChangePassword}/>}/>
         </Routes>
       </main>

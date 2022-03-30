@@ -1,4 +1,4 @@
-const SignIn = (handleSignIn, handleChange) => {
+const SignIn = ({handleSignIn, handleChange}) => {
     return (
         <div className="sign-in">
           <h2>Sign In!</h2>
@@ -7,11 +7,13 @@ const SignIn = (handleSignIn, handleChange) => {
               Email:
               <input type="email" name="email" onChange={handleChange} />
             </label>
+            <br />
             <label>
               Password:
               <input type="password" name="password" onChange={handleChange} />
             </label>
-            <input type="submit" value="Submit" />
+            <br />
+            <input type="submit" value="Submit" onClick={handleSignIn}/>
           </form>
         </div>
     );
