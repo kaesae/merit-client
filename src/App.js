@@ -90,26 +90,24 @@ function App() {
     .then(console.log("You have successfully changed your password."));
   };
 
-  const lastPost = (event) => {
+  const displayLatestPost = (event) => {
     event.preventDefault();
-    console.log(`${token}`)
-    fetch("http://127.0.0.1:8000/overview/", {
+    console.log(`Token for the latest post is: ${token}`)
+    fetch(`http://127.0.0.1:8000/posts/6`, {
       headers: {
         "Content-Type": "application/json",
-        Authorizations: `Token ${token}`,
+        Authorization: `Token ${token}`,
       },
       method: "GET",
     })
     .then((response) => response.json())
-    .then((data) => console.log(data))
-
-  }
+    .then((data) => console.log(data.title))
+      };
 
   return (
     <div className="App">
       <Header />
       <NavBar />
-      <Home />
 
 
       <main>
@@ -120,7 +118,7 @@ function App() {
       </div>
         <Routes>
           {/* <Route path='/'/> */}
-          <Route path='/home/'/>
+          <Route path='/home/' element={<Home displayLatestPost={displayLatestPost} />} />
           <Route path='/sign-up/' element={<SignUp handleChange={handleChange} handleSignUp={handleSignUp}/>}/>
           <Route path='/sign-in/' element={<SignIn handleChange={handleChange} handleSignIn={handleSignIn}/>}/>
           <Route path='/sign-out/' element={<SignOut handleChange={handleChange} handleSignOut={handleSignOut}/>}/>
