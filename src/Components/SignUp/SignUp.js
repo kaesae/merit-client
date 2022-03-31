@@ -1,8 +1,8 @@
-const SignUp = ({handleSubmit, handleChange}) => {
+const SignUp = ({handleSignUp, handleChange}) => {
   return (
     <div className="sign-up">
       <h2>Sign Up!</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSignUp}>
         <label>
           Email:
           <input type="email" name="email" onChange={handleChange} />

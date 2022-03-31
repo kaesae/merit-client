@@ -24,7 +24,7 @@ function App() {
 
   // Overview Page
 
-  const handleSubmit = (event) => {
+  const handleSignUp = (event) => {
     event.preventDefault();
     fetch("http://127.0.0.1:8000/sign-up/", {
       headers: {
@@ -32,7 +32,9 @@ function App() {
       },
       method: "POST",
       body: JSON.stringify(user),
-    });
+    })
+    .then((response) => response.json())
+    console.log(`Welcome to Merit!`);
   };
 
   const handleChange = (event) => {
@@ -119,7 +121,7 @@ function App() {
         <Routes>
           {/* <Route path='/'/> */}
           <Route path='/home/'/>
-          <Route path='/sign-up/' element={<SignUp handleChange={handleChange} handleSubmit={handleSubmit}/>}/>
+          <Route path='/sign-up/' element={<SignUp handleChange={handleChange} handleSignUp={handleSignUp}/>}/>
           <Route path='/sign-in/' element={<SignIn handleChange={handleChange} handleSignIn={handleSignIn}/>}/>
           <Route path='/sign-out/' element={<SignOut handleChange={handleChange} handleSignOut={handleSignOut}/>}/>
           <Route path='/change-password/' element={<ChangePassword handleChange={handleChange} handleChangePassword={handleChangePassword}/>}/>
