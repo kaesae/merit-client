@@ -48,7 +48,6 @@ function App() {
 
   const handleSignIn = (event) => {
     event.preventDefault();
-    // fetch(`${url}/sign-in/`, {
     fetch("http://127.0.0.1:8000/sign-in/", {
       headers: {
         "Content-Type": "application/json",
@@ -59,8 +58,8 @@ function App() {
       .then((response) => response.json())
       .then((data) => setToken(data.user.token))
       .then(console.log("You have signed in"));
-      console.log(token)
-  };
+      console.log(`Token for Signing In: ${token}`)
+    };
 
   const handleSignOut = (event) => {
     event.preventDefault();
@@ -73,9 +72,11 @@ function App() {
     })
       .then(() => setToken(""))
       .then(console.log("You are signed out!"));
+      console.log(`Your token is now: ${token}`)
   };
 
   const handleChangePassword = (event) => {
+    console.log(`Token for Changing Passwords: ${token}`)
     event.preventDefault();
     fetch("http://127.0.0.1:8000/change-password/", {
       headers: {

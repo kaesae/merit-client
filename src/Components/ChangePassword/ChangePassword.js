@@ -13,7 +13,7 @@ const ChangePassword = ({handleChangePassword, handleChange}) => {
           <input type="password" name="password" onChange={handleChange} />
         </label>
         <br />
-        <input type="submit" value="Submit" onClick={handleChangePassword}/>
+        <input type="submit" value="Submit" />
       </form>
     </div>
   );

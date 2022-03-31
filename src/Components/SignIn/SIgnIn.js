@@ -1,9 +1,5 @@
-import { useState } from 'react'
 
 const SignIn = ({ handleSignIn, handleChange }) => {
-  const [verification, setVerification] = useState(false);
-  const [email, setEmail] = useState("");
-
 
   return (
     <div className="sign-in">
@@ -19,18 +15,8 @@ const SignIn = ({ handleSignIn, handleChange }) => {
           <input type="password" name="password" onChange={handleChange} />
         </label>
         <br />
-        <input type="submit" value="Submit" onClick={handleSignIn} />
+        <input type="submit" value="Submit" />
       </form>
-      {/* {verification === false ? (
-        <div></div>
-      ) : (
-        <div className="unverified">
-          <h1>
-            We do not have record of your email. Please create an account to
-            continue.
-          </h1>
-        </div>
-      )} */}
     </div>
   );
 };
