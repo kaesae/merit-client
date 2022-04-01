@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, Navigate, Link } from "react-router-dom";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
@@ -48,6 +48,7 @@ function App() {
     });
   };
 
+
   const handleSignIn = (event) => {
     event.preventDefault();
     fetch("http://127.0.0.1:8000/sign-in/", {
@@ -59,8 +60,9 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => setToken(data.user.token))
-      .then(console.log("You have signed in"));
-      console.log(`Token for Signing In: ${token}`)
+      .then(console.log("You have signed in"))
+      .then(console.log(`Token for Signing In: ${token}`))
+      .then(() => displayLatestPost());
     };
 
   const handleSignOut = (event) => {
@@ -91,7 +93,6 @@ function App() {
   };
 
   const displayLatestPost = (event) => {
-    event.preventDefault();
     console.log(`Token for the latest post is: ${token}`)
     fetch(`http://127.0.0.1:8000/posts/6`, {
       headers: {
@@ -101,8 +102,18 @@ function App() {
       method: "GET",
     })
     .then((response) => response.json())
-    .then((data) => console.log(data.title))
-      };
+    .then((data) => setLatestPost(data))
+    .then(console.log(latestPost));
+  };
+
+  // useEffect(() => {
+  //   // displayLatestPost()
+  //   console.log(latestPost);
+  // }, []);
+
+  // useEffect(() => {
+  //   makeAPICall();
+  // }, [props.name]);
 
   return (
     <div className="App">
@@ -114,11 +125,18 @@ function App() {
       <div className="home-container">
         <h3 className="merit-title">Merit</h3>
         <img className="medal" src={Medal} />
+        {/* <div className="singleLatestPost">
+          <h6>{latestPost ? "Title: " + latestPost.title : ' '}</h6>
+          <h6>{latestPost ? "Content " + latestPost.content : ' '}</h6>
+          <h6>{latestPost ? "Author " + latestPost.author : ' '}</h6>
+        </div> */}
+
+
 
       </div>
         <Routes>
           {/* <Route path='/'/> */}
-          <Route path='/home/' element={<Home displayLatestPost={displayLatestPost} />} />
+          <Route path='/home/' element={<Home displayLatestPost={displayLatestPost} latestPost={latestPost} />} />
           <Route path='/sign-up/' element={<SignUp handleChange={handleChange} handleSignUp={handleSignUp}/>}/>
           <Route path='/sign-in/' element={<SignIn handleChange={handleChange} handleSignIn={handleSignIn}/>}/>
           <Route path='/sign-out/' element={<SignOut handleChange={handleChange} handleSignOut={handleSignOut}/>}/>
