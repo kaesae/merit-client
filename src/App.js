@@ -10,13 +10,14 @@ import SignUp from "./Components/SignUp/SignUp";
 import SignOut from "./Components/SignOut/SignOut";
 import NavBar from "./Components/NavBar/NavBar";
 import Medal from "./Icons/goldmedal.png";
+import PostForm from "./Components/PostForm.js/PostForm";
 
 
 function App() {
   const [user, setUser] = useState({ email: "", password: "" });
   const [token, setToken] = useState("");
   const [value, setValue] = useState("");
-  const [latestPost, setLatestPost] = useState();
+  const [latestPost, setLatestPost] = useState({});
 
   const url = "http://127.0.0.1:8000"
 
@@ -94,7 +95,8 @@ function App() {
 
   const displayLatestPost = (event) => {
     console.log(`Token for the latest post is: ${token}`)
-    fetch(`http://127.0.0.1:8000/posts/6`, {
+    // Currently hardcoded
+    fetch(`http://127.0.0.1:8000/posts/9`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -106,14 +108,21 @@ function App() {
     .then(console.log(latestPost));
   };
 
-  // useEffect(() => {
-  //   // displayLatestPost()
-  //   console.log(latestPost);
-  // }, []);
-
-  // useEffect(() => {
-  //   makeAPICall();
-  // }, [props.name]);
+  const handlePost = (event) => {
+    event.preventDefault();
+    fetch("http://127.0.0.1:8000/post/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+      method: "POST",
+      body: JSON.stringify(user),
+    })
+      .then((response) => response.json())
+      .then((data) => setLatestPost(data))
+      .then(console.log("You have posted!"));
+      console.log(`${latestPost}`)
+  };
 
   return (
     <div className="App">
@@ -141,6 +150,7 @@ function App() {
           <Route path='/sign-in/' element={<SignIn handleChange={handleChange} handleSignIn={handleSignIn}/>}/>
           <Route path='/sign-out/' element={<SignOut handleChange={handleChange} handleSignOut={handleSignOut}/>}/>
           <Route path='/change-password/' element={<ChangePassword handleChange={handleChange} handleChangePassword={handleChangePassword}/>}/>
+          <Route path='/post/' element={<PostForm handleChange={handleChange} handlePost={handlePost} />}/>
         </Routes>
       </main>
 
