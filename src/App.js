@@ -12,18 +12,14 @@ import NavBar from "./Components/NavBar/NavBar";
 import Medal from "./Icons/goldmedal.png";
 import PostForm from "./Components/PostForm/PostForm";
 
-import { useSpring, animated } from 'react-spring'
-
-
 function App() {
   const [user, setUser] = useState({ email: "", password: "" });
   const [token, setToken] = useState("");
   const [latestPost, setLatestPost] = useState({});
+  const [rating, setRating] = useState("");
 
   const url = "http://127.0.0.1:8000"
 
-
-  // Overview Page
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -96,7 +92,7 @@ function App() {
   const displayLatestPost = (event) => {
     console.log(`Token for the latest post is: ${token}`)
     // Currently hardcoded
-    fetch(`http://127.0.0.1:8000/posts/10`, {
+    fetch(`http://127.0.0.1:8000/posts/12`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -105,8 +101,50 @@ function App() {
     })
     .then((response) => response.json())
     .then((data) => setLatestPost(data))
-    .then(console.log(latestPost));
+    .then(() => setRating(latestPost.stars))
+    .then(console.log(latestPost))
+    .then(console.log(rating))
+    .then(() => handleStars());
   };
+
+  const handleStars = () => {
+    let star = latestPost.stars
+    const hideStars = () => {
+      document.getElementById("star-1").style.visibility="hidden"
+      document.getElementById("star-2").style.visibility="hidden"
+      document.getElementById("star-3").style.visibility="hidden"
+      document.getElementById("star-4").style.visibility="hidden"
+      document.getElementById("star-5").style.visibility="hidden"
+    }
+    if (star == 1) {
+      hideStars()
+      document.getElementById("star-1").style.visibility="visible"
+    } else if (star == 2) {
+      hideStars()
+      document.getElementById("star-1").style.visibility="visible"
+      document.getElementById("star-1").style.visibility="visible"
+    } else if (star == 3) {
+      hideStars()
+      document.getElementById("star-1").style.visibility="visible"
+      document.getElementById("star-2").style.visibility="visible"
+      document.getElementById("star-3").style.visibility="visible"
+    } else if (star == 4) {
+      hideStars()
+      document.getElementById("star-1").style.visibility="visible"
+      document.getElementById("star-2").style.visibility="visible"
+      document.getElementById("star-3").style.visibility="visible"
+      document.getElementById("star-4").style.visibility="visible"
+
+    }
+    else {
+      hideStars()
+      document.getElementById("star-1").style.visibility="visible"
+      document.getElementById("star-2").style.visibility="visible"
+      document.getElementById("star-3").style.visibility="visible"
+      document.getElementById("star-4").style.visibility="visible"
+      document.getElementById("star-5").style.visibility="visible"
+    }
+  }
 
   const handlePost = (event) => {
     event.preventDefault();

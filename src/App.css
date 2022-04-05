@@ -42,7 +42,6 @@ h6 {
 @keyframes merit {
   0% {
     top: 0px;
-    /* opacity: 0; */
     color: transparent;
     transform: translateY(0%);
   }
@@ -51,6 +50,31 @@ h6 {
     top: 400px;
     color: black;
     transform: translateY(15%);
-    /* opacity: 100; */
   }
+}
+
+
+.stars {
+    display: flex;
+    justify-content: center;
+}
+
+#star-1 {
+    visibility: hidden;
+}
+
+#star-2 {
+    visibility: hidden;
+}
+
+#star-3 {
+    visibility: hidden;
+}
+
+#star-4 {
+    visibility: hidden;
+}
+
+#star-5 {
+    visibility: hidden;
 }
