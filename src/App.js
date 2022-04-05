@@ -10,17 +10,17 @@ import SignUp from "./Components/SignUp/SignUp";
 import SignOut from "./Components/SignOut/SignOut";
 import NavBar from "./Components/NavBar/NavBar";
 import Medal from "./Icons/goldmedal.png";
-import PostForm from "./Components/PostForm.js/PostForm";
+import PostForm from "./Components/PostForm/PostForm";
+
+import { useSpring, animated } from 'react-spring'
 
 
 function App() {
   const [user, setUser] = useState({ email: "", password: "" });
   const [token, setToken] = useState("");
-  const [value, setValue] = useState("");
   const [latestPost, setLatestPost] = useState({});
 
   const url = "http://127.0.0.1:8000"
-
 
 
   // Overview Page
@@ -96,7 +96,7 @@ function App() {
   const displayLatestPost = (event) => {
     console.log(`Token for the latest post is: ${token}`)
     // Currently hardcoded
-    fetch(`http://127.0.0.1:8000/posts/9`, {
+    fetch(`http://127.0.0.1:8000/posts/10`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -124,6 +124,8 @@ function App() {
       console.log(`${latestPost}`)
   };
 
+
+
   return (
     <div className="App">
       <Header />
@@ -131,18 +133,13 @@ function App() {
 
 
       <main>
+
       <div className="home-container">
         <h3 className="merit-title">Merit</h3>
         <img className="medal" src={Medal} />
-        {/* <div className="singleLatestPost">
-          <h6>{latestPost ? "Title: " + latestPost.title : ' '}</h6>
-          <h6>{latestPost ? "Content " + latestPost.content : ' '}</h6>
-          <h6>{latestPost ? "Author " + latestPost.author : ' '}</h6>
-        </div> */}
-
-
-
       </div>
+
+      
         <Routes>
           {/* <Route path='/'/> */}
           <Route path='/home/' element={<Home displayLatestPost={displayLatestPost} latestPost={latestPost} />} />

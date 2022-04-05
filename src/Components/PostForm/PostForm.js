@@ -6,8 +6,8 @@ const PostForm = ({ handleChange, handlePost }) => {
       <h2>Post!</h2>
       <form onSubmit={handlePost}>
         <label>
-          Title:
-          <input type="title" name="title" onChange={handleChange} />
+          Stars:
+          <input type="stars" name="stars" onChange={handleChange} />
         </label>
         <br />
         <label>
