@@ -92,7 +92,7 @@ function App() {
   const displayLatestPost = (event) => {
     console.log(`Token for the latest post is: ${token}`)
     // Currently hardcoded
-    fetch(`http://127.0.0.1:8000/posts/12`, {
+    fetch(`http://127.0.0.1:8000/posts/16`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -135,14 +135,15 @@ function App() {
       document.getElementById("star-3").style.visibility="visible"
       document.getElementById("star-4").style.visibility="visible"
 
-    }
-    else {
+    } else if (star == 5) {
       hideStars()
       document.getElementById("star-1").style.visibility="visible"
       document.getElementById("star-2").style.visibility="visible"
       document.getElementById("star-3").style.visibility="visible"
       document.getElementById("star-4").style.visibility="visible"
       document.getElementById("star-5").style.visibility="visible"
+    } else {
+      hideStars()
     }
   }
 

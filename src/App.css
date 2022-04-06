@@ -20,6 +20,7 @@ img.medal {
 .home-container {
   display: flex;
   justify-content: center;
+  height: 110px;
 }
 
 h6 {
@@ -27,11 +28,11 @@ h6 {
 }
 
 .merit-title { 
-    color: transparent;
+  color: transparent;
   font-size: 50px;
   padding: -10px 0 10px 0;
   animation-name: merit;
-  animation-duration: 1s;
+  animation-duration: 1.7s;
   animation-delay: .3s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
@@ -49,7 +50,7 @@ h6 {
   100% {
     top: 400px;
     color: black;
-    transform: translateY(15%);
+    transform: translateY(50%);
   }
 }
 

@@ -1,5 +1,4 @@
 import "./Home.css";
-
 const Home = ({ displayLatestPost, latestPost }) => {
 
 
@@ -9,17 +8,18 @@ const Home = ({ displayLatestPost, latestPost }) => {
 
       <div>
         <div className="singleLatestPost">
-          <h6>{latestPost ? "Rating: " + latestPost.stars : ' '}
+          <div className="profile-image"></div>
+          <h6 className="rating-header">{latestPost ? "Rating: " + latestPost.stars : ' '}
           <div className="stars">
-          <div id="star-1">⭐</div>
-          <div id="star-2">⭐</div>
-          <div id="star-3">⭐</div>
-          <div id="star-4">⭐</div>
-          <div id="star-5">⭐</div>
+            <div id="star-1">⭐</div>
+            <div id="star-2">⭐</div>
+            <div id="star-3">⭐</div>
+            <div id="star-4">⭐</div>
+            <div id="star-5">⭐</div>
           </div>
           </h6>
-          <h6>{latestPost ? "Content " + latestPost.content : ' '}</h6>
-          <h6>{latestPost ? "Author " + latestPost.author : ' '}</h6>
+          <h6 className="author-header">{latestPost ? "Author: " + latestPost.author : ' '}</h6>
+          <h6 className="content-header">{latestPost ? latestPost.content : ' '}</h6>
         </div>
       </div>
     </div>

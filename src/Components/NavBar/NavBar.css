@@ -1,5 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Graduate&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lato:wght@100&family=Shadows+Into+Light&display=swap');
+
 .navbar-links {
     padding: 20px 0 0 0;
     display: flex;
     justify-content: space-around;
+    font-size: 15px;
+    font-family: 'Lato', sans-serif;
+    text-decoration: none;
 }
